@@ -1,4 +1,4 @@
-public abstract class User implements IUser {
+public class User implements IUser {
     final private int id;
     final private String name;
     final private String surname;
@@ -44,5 +44,9 @@ public abstract class User implements IUser {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
     }
 }
