@@ -5,9 +5,11 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        String url = "jdbc:mysql://localhost:3306/lot_manager";
-        String username = "root";
-        String password = "";
+        dataBaseData db = new dataBaseData();
+
+        String url = "jdbc:mysql://localhost:3306/" + db.database;
+        String username = db.username;
+        String password = db.password;
         try {
             ArrayList<User> customers = new ArrayList<>();
 
