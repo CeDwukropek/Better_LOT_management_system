@@ -3,7 +3,7 @@ import java.sql.*;
 
 public class Main {
     public static void main(String[] args) {
-        String url = "jdbc:mysql://localhost:3306/pracownicy";
+        String url = "jdbc:mysql://localhost:3306/lot_manager";
         String username = "root";
         String password = "";
 
