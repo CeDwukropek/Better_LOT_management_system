@@ -14,14 +14,18 @@ public class Main {
 
             Statement stm = conn.createStatement();
 
-            ResultSet res = stm.executeQuery("select * from pracownicy");
+            ResultSet res = stm.executeQuery("select * from customer");
             ResultSetMetaData rsmd = res.getMetaData();
+
+            StringBuilder user = new StringBuilder();
 
             while (res.next()) {
                 int x = rsmd.getColumnCount();
                 for (int i = 1; i <= x; i++) {
-                    System.out.println(res.getString(i));
+                    user.append(res.getString(i)).append(" ");
                 }
+                System.out.println(user);
+                user = new StringBuilder();
             }
 
         } catch (Exception e) {
