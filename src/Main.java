@@ -11,7 +11,7 @@ public class Main {
         String username = db.username;
         String password = db.password;
         try {
-            ArrayList<User> customers = new ArrayList<>();
+            ArrayList<Customer> customers = new ArrayList<>();
 
             Class.forName("com.mysql.cj.jdbc.Driver");
 
@@ -31,7 +31,7 @@ public class Main {
                 }
 
                 try {
-                    User user = new User(Integer.parseInt(userInfo[0]), userInfo[1], userInfo[2], userInfo[3], userInfo[4], userInfo[5]);
+                    Customer user = new Customer(Integer.parseInt(userInfo[0]), userInfo[1], userInfo[2], userInfo[3], userInfo[4], userInfo[5]);
                     customers.add(user);
                 } catch (Exception e) {
                     System.out.println("Error while creating user");

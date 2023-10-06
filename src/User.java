@@ -1,4 +1,4 @@
-public class User implements IUser {
+abstract public class User {
     final private int id;
     final private String name;
     final private String surname;
@@ -14,24 +14,16 @@ public class User implements IUser {
         this.birthDate = birthDate;
     }
 
-    @Override
-    public IUser getUser() {
+    public User getUser() {
         return this;
     }
 
-    @Override
     public String getName() {
         return this.name;
     }
 
-    @Override
     public int getId() {
         return this.id;
-    }
-
-    @Override
-    public void sendMessage() {
-        return;
     }
 
     public String getSurname() {
@@ -41,12 +33,10 @@ public class User implements IUser {
     public String getPhone() {
         return phone;
     }
-
-    public String getEmail() {
-        return email;
-    }
-
     public String getBirthDate() {
         return birthDate;
+    }
+    public String getEmail() {
+        return email;
     }
 }
