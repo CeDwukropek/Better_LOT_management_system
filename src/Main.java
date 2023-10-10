@@ -8,22 +8,15 @@ public class Main {
         try {
             ArrayList<Customer> customers = new ArrayList<>();
 
-
-
-            
             ResultSet res = db.sendQuery("select * from customers");
             int columnCount = db.getColumnsNumber(res);
 
             while (res.next()) {
                 String[] userInfo = new String[columnCount];
 
-
-                
-
                 for (int i = 1; i <= columnCount; i++) {
                     userInfo[i - 1] = res.getString(i);
                 }
-
                 try {
                     Customer user = new Customer(Integer.parseInt(userInfo[0]), userInfo[1], userInfo[2], userInfo[3], userInfo[4], userInfo[5]);
                     customers.add(user);
