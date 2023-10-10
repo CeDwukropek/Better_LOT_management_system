@@ -14,6 +14,9 @@ public class Main {
             while (res.next()) {
                 String[] userInfo = new String[columnCount];
 
+
+                
+
                 for (int i = 1; i <= columnCount; i++) {
                     userInfo[i - 1] = res.getString(i);
                 }
