@@ -8,7 +8,7 @@ public class Main {
         try {
             ArrayList<Customer> customers = new ArrayList<>();
 
-            ResultSet res = db.sendQuery("select * from customers");
+            ResultSet res = db.sendQuery("select * from customer");
             int columnCount = db.getColumnsNumber(res);
 
             while (res.next()) {
@@ -33,5 +33,6 @@ public class Main {
         } catch (Exception e) {
             System.out.println("DB error");
         }
+
     }
 }
