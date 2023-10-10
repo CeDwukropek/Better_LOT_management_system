@@ -8,6 +8,9 @@ public class Main {
         try {
             ArrayList<Customer> customers = new ArrayList<>();
 
+
+
+            
             ResultSet res = db.sendQuery("select * from customers");
             int columnCount = db.getColumnsNumber(res);
 
