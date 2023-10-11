@@ -5,10 +5,7 @@ public class Main {
         try {
             DBConnection db = new DBConnection();
             CustomersCreator customersCreator = new CustomersCreator(db);
-
-            for(Object x : customersCreator.getData()) {
-                System.out.println(((User)x).getName() + " " + ((User)x).getSurname());
-            }
+            PlanesCreator planesCreator = new PlanesCreator(db);
         }
         catch (SQLException e) {
             throw new RuntimeException(e);
