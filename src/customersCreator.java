@@ -3,15 +3,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class customersCreator {
+public class customersCreator implements ICreator {
     private final DBConnection db;
     private ArrayList<User> customers = new ArrayList<>();
     public customersCreator(DBConnection db) throws QueryException, SQLException {
         this.db = db;
-        importUserData();
+        importData();
     }
 
-    private void importUserData() throws QueryException, SQLException {
+    @Override
+    public void importData() throws QueryException, SQLException {
         ResultSet res = db.sendQuery("select * from customer");
         int columnCount = db.getColumnsNumber(res);
         
