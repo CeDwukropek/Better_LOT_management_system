@@ -2,19 +2,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
-public class customersCreator implements ICreator {
-    private final DBConnection db;
-    private ArrayList<User> customers = new ArrayList<>();
-    public customersCreator(DBConnection db) throws QueryException, SQLException {
-        this.db = db;
+public class CustomersCreator extends Creator implements ICreator {
+    private ArrayList<Object> customers = new ArrayList<>();
+    public CustomersCreator(DBConnection db) throws QueryException, SQLException {
+        super(db);
         importData();
     }
 
     @Override
     public void importData() throws QueryException, SQLException {
-        ResultSet res = db.sendQuery("select * from customer");
-        int columnCount = db.getColumnsNumber(res);
+        ResultSet res = this.getDb().sendQuery("select * from customer");
+        int columnCount = this.getDb().getColumnsNumber(res);
         
         while(res.next()) {
             String[] userInfo = new String[columnCount];
@@ -30,7 +30,7 @@ public class customersCreator implements ICreator {
         }
     }
 
-    public ArrayList<User> getCustomers() {
+    public ArrayList<Object> getData() {
         return customers;
     }
 }
