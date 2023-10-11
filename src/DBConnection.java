@@ -7,7 +7,7 @@ public class DBConnection {
     final private String password;
     private Connection conn;
 
-    public DBConnection() {
+    public DBConnection() throws DatabaseConnectionException {
         this.db = new dataBaseData();
         this.url = "jdbc:mysql://localhost:3306/" + db.database;
         this.username = db.username;
@@ -16,19 +16,19 @@ public class DBConnection {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             this.conn = DriverManager.getConnection(this.url, this.username, this.password);
-        } catch (Exception e) {
-            System.out.println("Database connection error");
-            this.conn = null;
+        } catch (SQLException e) {
+            throw new DatabaseConnectionException("Can't connect to " + db.database);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Couldn't find SQL connection module");
         }
     }
 
-    public ResultSet sendQuery(String q) {
+    public ResultSet sendQuery(String q) throws QueryException {
         try {
             Statement stm = conn.createStatement();
             return stm.executeQuery(q);
-        } catch (Exception e) {
-            System.out.println("Query error");
-            return null;
+        } catch (SQLException e) {
+            throw new QueryException("Query error");
         }
     }
 

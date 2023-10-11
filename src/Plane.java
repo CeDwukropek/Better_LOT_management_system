@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 
 public class Plane {
-    private Countries startCountry;
-    private Countries finalCountry;
-    private String name;
+    private final Countries startCountry;
+    private final Countries finalCountry;
+    private final String name;
     private int passengersLimit = 10;
     private ArrayList<User> flightAttenders = new ArrayList<>();
 
