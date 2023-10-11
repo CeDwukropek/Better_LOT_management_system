@@ -3,11 +3,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Main {
+
     public static void main(String[] args) {
         DBConnection db = new DBConnection();
         try {
             ArrayList<Customer> customers = new ArrayList<>();
-
             ResultSet res = db.sendQuery("select * from customer");
             int columnCount = db.getColumnsNumber(res);
 
@@ -29,7 +29,6 @@ public class Main {
             for(User x : customers) {
                 System.out.println(x.getName() + " " + x.getSurname());
             }
-
         } catch (Exception e) {
             System.out.println("DB error");
         }
