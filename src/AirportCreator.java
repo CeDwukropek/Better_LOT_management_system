@@ -8,7 +8,6 @@ public class AirportCreator extends Creator implements ICreator {
 
     public AirportCreator(DBConnection db) throws QueryException, SQLException {
         super(db);
-        importData();
     }
 
     @Override
@@ -21,14 +20,10 @@ public class AirportCreator extends Creator implements ICreator {
 
         while(airportData.next()) {
             String[] airportInfo = new String[columnCount];
-
-            for (int i = 1; i <= columnCount; i++) {
-                airportInfo[i - 1] = airportData.getString(i);
-            }
+            for (int i = 1; i <= columnCount; i++) airportInfo[i - 1] = airportData.getString(i);
 
             Airport airport = new Airport(Integer.parseInt(airportInfo[0]), airportInfo[1], airportInfo[2], airportInfo[3]);
             airports.add(airport);
-
             Arrays.fill(airportInfo, null);
         }
     }
