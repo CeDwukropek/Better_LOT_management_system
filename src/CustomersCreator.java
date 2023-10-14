@@ -7,6 +7,7 @@ public class CustomersCreator extends Creator implements ICreator {
     private final ArrayList<Object> customers = new ArrayList<>();
     public CustomersCreator(DBConnection db) throws QueryException, SQLException {
         super(db);
+        importData();
     }
 
     @Override

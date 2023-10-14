@@ -8,6 +8,7 @@ public class AirportCreator extends Creator implements ICreator {
 
     public AirportCreator(DBConnection db) throws QueryException, SQLException {
         super(db);
+        importData();
     }
 
     @Override

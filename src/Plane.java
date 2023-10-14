@@ -3,10 +3,10 @@ import java.util.ArrayList;
 public class Plane {
     private final int id;
     private final String name;
-    private int passengersLimit;
+    private final int passengersLimit;
     private final Airport startAirport;
     private final Airport finaltAirport;
-    private ArrayList<User> flightAttenders = new ArrayList<>();
+    private final ArrayList<User> flightAttenders;
 
     public Plane(int id,
                  String name,

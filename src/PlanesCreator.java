@@ -10,6 +10,7 @@ public class PlanesCreator extends Creator implements ICreator {
     public PlanesCreator(DBConnection db, ArrayList<Object> airports, ArrayList<Object> customers) throws QueryException, SQLException {
         super(db);
         this.airports = airports;
+        importData();
     }
 
     @Override
