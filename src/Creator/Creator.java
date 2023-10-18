@@ -1,4 +1,6 @@
-import java.util.ArrayList;
+package Creator;
+
+import DB.DBConnection;
 
 public abstract class Creator {
     private final DBConnection db;
@@ -7,4 +9,5 @@ public abstract class Creator {
     }
 
     public DBConnection getDb() { return this.db; }
+
 }
