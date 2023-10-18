@@ -1,6 +1,6 @@
 package Creator.Airport;
 
-import Creator.Creator;
+import Creator.*;
 import DB.DBConnection;
 import DB.QueryException;
 

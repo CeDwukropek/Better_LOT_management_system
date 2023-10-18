@@ -1,4 +1,4 @@
-package Creator;
+package Users;
 
 abstract public class User {
     final private int id;

@@ -1,5 +1,4 @@
-import Creator.IUser;
-import Creator.User;
+package Users;
 
 public class Admin extends User implements IUser {
     final private boolean adminUI = true;

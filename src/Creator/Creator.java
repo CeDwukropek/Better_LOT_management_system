@@ -9,4 +9,5 @@ public abstract class Creator {
     }
 
     public DBConnection getDb() { return this.db; }
+
 }

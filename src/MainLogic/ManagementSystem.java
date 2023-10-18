@@ -1,4 +1,6 @@
-import Creator.User;
+package MainLogic;
+
+import Users.User;
 
 import java.util.ArrayList;
 
