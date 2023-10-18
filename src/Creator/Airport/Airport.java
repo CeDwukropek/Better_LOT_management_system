@@ -1,3 +1,5 @@
+package Creator.Airport;
+
 public class Airport {
     private final int id;
     private final String name;

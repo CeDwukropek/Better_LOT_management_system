@@ -1,3 +1,5 @@
+package Users;
+
 public class Admin extends User implements IUser {
     final private boolean adminUI = true;
     public Admin(int id, String name, String surname, String phone, String email, String birthDate) {
