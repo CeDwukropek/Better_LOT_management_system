@@ -1,23 +1,49 @@
 import java.util.ArrayList;
 
 public class Plane {
-    private final Countries startCountry;
-    private final Countries finalCountry;
+    private final int id;
     private final String name;
-    private int passengersLimit = 10;
-    private ArrayList<User> flightAttenders = new ArrayList<>();
+    private final int passengersLimit;
+    private final Airport startAirport;
+    private final Airport finaltAirport;
+    private final ArrayList<User> flightAttenders;
 
-    public Plane(Countries startCountry,
-                 Countries finalCountry,
+    public Plane(int id,
                  String name,
+                 int passengersLimit,
+                 Airport startAirport,
+                 Airport finaltAirport,
                  ArrayList<User> flightAttenders) {
-        this.startCountry = startCountry;
-        this.finalCountry = finalCountry;
+        this.id = id;
         this.name = name;
+        this.passengersLimit = passengersLimit;
+        this.startAirport = startAirport;
+        this.finaltAirport = finaltAirport;
         this.flightAttenders = flightAttenders;
     }
 
-    public void setPassengersLimit(int passengersLimit) {
-        this.passengersLimit = passengersLimit;
+    public int getId() {
+        return id;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPassengersLimit() {
+        return passengersLimit;
+    }
+
+    public Airport getStartAirport() {
+        return startAirport;
+    }
+
+    public Airport getFinaltAirport() {
+        return finaltAirport;
+    }
+
+    public ArrayList<User> getFlightAttenders() {
+        return flightAttenders;
+    }
+
 }
