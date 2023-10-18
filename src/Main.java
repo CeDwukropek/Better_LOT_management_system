@@ -8,11 +8,7 @@ public class Main {
             AirportCreator airportCreator = new AirportCreator(db);
             PlanesCreator planesCreator = new PlanesCreator(db, airportCreator.getData(), customersCreator.getData());
 
-            for (Object x : planesCreator.getData()) {
-                System.out.println(((Plane)x).getName());
-                System.out.println(((Plane)x).getFinaltAirport().getCityName());
-                System.out.println(((Plane)x).getStartAirport().getCityName());
-            }
+            planesCreator.printData();
         }
         catch (SQLException e) {
             throw new RuntimeException(e);

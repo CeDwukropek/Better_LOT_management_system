@@ -4,5 +4,5 @@ import java.util.Objects;
 
 public interface ICreator {
     void importData() throws QueryException, SQLException;
-    public ArrayList<Object> getData();
+    void printData();
 }

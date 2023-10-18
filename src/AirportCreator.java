@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class AirportCreator extends Creator implements ICreator {
-    private final ArrayList<Object> airports = new ArrayList<>();
+    private final ArrayList<Airport> airports = new ArrayList<>();
 
     public AirportCreator(DBConnection db) throws QueryException, SQLException {
         super(db);
@@ -30,7 +30,11 @@ public class AirportCreator extends Creator implements ICreator {
     }
 
     @Override
-    public ArrayList<Object> getData() {
+    public void printData() {
+
+    }
+
+    public ArrayList<Airport> getData() {
         return airports;
     }
 }

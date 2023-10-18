@@ -14,8 +14,8 @@ public class Plane {
                  Airport startAirport,
                  Airport finaltAirport,
                  ArrayList<User> flightAttenders) {
-        this.name = name;
         this.id = id;
+        this.name = name;
         this.passengersLimit = passengersLimit;
         this.startAirport = startAirport;
         this.finaltAirport = finaltAirport;
@@ -45,4 +45,5 @@ public class Plane {
     public ArrayList<User> getFlightAttenders() {
         return flightAttenders;
     }
+
 }

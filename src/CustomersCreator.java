@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class CustomersCreator extends Creator implements ICreator {
-    private final ArrayList<Object> customers = new ArrayList<>();
+    private final ArrayList<Customer> customers = new ArrayList<>();
     public CustomersCreator(DBConnection db) throws QueryException, SQLException {
         super(db);
         importData();
@@ -25,7 +25,12 @@ public class CustomersCreator extends Creator implements ICreator {
         }
     }
 
-    public ArrayList<Object> getData() {
+    @Override
+    public void printData() {
+
+    }
+
+    public ArrayList<Customer> getData() {
         return customers;
     }
 }

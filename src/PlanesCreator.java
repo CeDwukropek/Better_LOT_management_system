@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class PlanesCreator extends Creator implements ICreator {
-    private final ArrayList<Object> planes = new ArrayList<>();
-    private final ArrayList<Object> airports;
-    private ArrayList<Object> customers;
-    public PlanesCreator(DBConnection db, ArrayList<Object> airports, ArrayList<Object> customers) throws QueryException, SQLException {
+    private final ArrayList<Plane> planes = new ArrayList<>();
+    private final ArrayList<Airport> airports;
+    private ArrayList<Customer> customers;
+    public PlanesCreator(DBConnection db, ArrayList<Airport> airports, ArrayList<Customer> customers) throws QueryException, SQLException {
         super(db);
         this.airports = airports;
         importData();
@@ -36,17 +36,44 @@ public class PlanesCreator extends Creator implements ICreator {
                     Integer.parseInt(planeInfo[0]),
                     planeInfo[1],
                     Integer.parseInt(planeInfo[2]),
-                    (Airport) airports.get(airportsInfo[0]),
-                    (Airport) airports.get(airportsInfo[1]),
+                    airports.get(airportsInfo[0]),
+                    airports.get(airportsInfo[1]),
                     null
-
             );
             planes.add(user);
             Arrays.fill(planeInfo, null);
         }
     }
 
-    public ArrayList<Object> getData() {
+    @Override
+    public void printData() {
+        for (Plane x : this.planes) {
+            System.out.println(x.getId());
+            System.out.println(x.getName());
+            System.out.println(x.getPassengersLimit());
+            System.out.println(x.getStartAirport().getId());
+            System.out.println(x.getStartAirport().getName());
+            System.out.println(x.getStartAirport().getCityName());
+            System.out.println(x.getStartAirport().getCountryName());
+            System.out.println(x.getFinaltAirport().getId());
+            System.out.println(x.getFinaltAirport().getName());
+            System.out.println(x.getFinaltAirport().getCityName());
+            System.out.println(x.getFinaltAirport().getCountryName());
+
+            if (x.getFlightAttenders() != null) {
+                for (User z : x.getFlightAttenders()) {
+                    System.out.println(z.getId());
+                    System.out.println(z.getName());
+                    System.out.println(z.getSurname());
+                    System.out.println(z.getBirthDate());
+                    System.out.println(z.getEmail());
+                    System.out.println(z.getPhone());
+                }
+            }
+        }
+    }
+
+    public ArrayList<Plane> getData() {
         return planes;
     }
 }
