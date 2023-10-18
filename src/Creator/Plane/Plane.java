@@ -1,3 +1,7 @@
+package Creator.Plane;
+
+import Creator.Airport.Airport;
+
 import java.util.ArrayList;
 
 public class Plane {

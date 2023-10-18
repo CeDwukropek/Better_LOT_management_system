@@ -1,3 +1,5 @@
+package Creator;
+
 abstract public class User {
     final private int id;
     final private String name;

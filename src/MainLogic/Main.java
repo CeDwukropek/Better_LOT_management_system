@@ -1,4 +1,7 @@
+package MainLogic;
+
 import java.sql.*;
+import DB.*;
 
 public class Main {
     public static void main(String[] args) throws DatabaseConnectionException, QueryException {
