@@ -1,5 +1,6 @@
 package MainLogic;
 
+import UI.UICustomer;
 import UI.UILogin;
 import Users.User;
 
@@ -8,21 +9,30 @@ import java.util.ArrayList;
 
 public class ManagementSystem {
     ArrayList<User> flightAttenders = new ArrayList<>();
-    ManagementSystem() {
 
+    public void loginUI() {
+        UILogin frame = new UILogin();
+
+        frame.setContentPane(frame.mainPanel);
+        frame.setTitle("Login");
+        frame.setSize(300, 250);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-    void createPlane() {
 
+    public void customerUI(String name) {
+        UICustomer frame = new UICustomer(name);
+
+        frame.setContentPane(frame.mainPanel);
+        frame.setTitle("Customer");
+        frame.setSize(600, 450);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    void loginUI() {
-        UILogin login = new UILogin();
-
-        login.setContentPane(login.mainPanel);
-        login.setTitle("Login");
-        login.setSize(300, 250);
-        login.setLocationRelativeTo(null);
-        login.setVisible(true);
-        login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public void adminUI() {
+        // TODO: make this fcking UI
     }
 }

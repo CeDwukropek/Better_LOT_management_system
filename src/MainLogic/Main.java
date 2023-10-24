@@ -21,7 +21,6 @@ public class Main {
             ManagementSystem manager = new ManagementSystem();
 
             manager.loginUI();
-
         }
         catch (SQLException e) {
             throw new RuntimeException(e);

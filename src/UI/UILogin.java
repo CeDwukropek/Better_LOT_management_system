@@ -3,12 +3,15 @@ package UI;
 import DB.DBConnection;
 import DB.DatabaseConnectionException;
 import DB.QueryException;
+import MainLogic.ManagementSystem;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class UILogin extends JFrame {
     // wzorzec singletone
@@ -16,10 +19,9 @@ public class UILogin extends JFrame {
     private JTextField textField1;
     private JPasswordField passwordField1;
     private JButton logInButton;
-    private boolean isLogged = false;
+    private static ManagementSystem manager;
 
     public UILogin() {
-
         textField1.setBorder(BorderFactory.createMatteBorder(0,0,1,0, Color.GRAY));
         passwordField1.setBorder(BorderFactory.createMatteBorder(0,0,1,0, Color.GRAY));
         logInButton.addActionListener(new ActionListener() {
@@ -31,10 +33,29 @@ public class UILogin extends JFrame {
                 try {
                     DBConnection db = new DBConnection();
                     try {
-                        db.sendQuery("SELECT isAdmin FROM customer WHERE email = " + email + " AND password = " + password);
+                        String q = "SELECT * FROM customer WHERE email = '" + email + "' AND password = '" + password + "';";
 
-                        isLogged = true;
-                    } catch (QueryException el) {
+                        ResultSet res = db.sendQuery(q);
+
+                        res.next();
+                        boolean isAdmin = res.getBoolean("isAdmin");
+                        String name = res.getString("name");
+
+                        System.out.println(isAdmin);
+                        System.out.println(name);
+
+                        boolean isLogged = true;
+
+                        if(!isLogged) { return; }
+
+                        if(isAdmin) {
+                            manager.adminUI();
+                            System.out.println("Admin");
+                        } else {
+                            manager.customerUI(name);
+                            System.out.println("Customer");
+                        }
+                    } catch (QueryException | SQLException el) {
                         throw new RuntimeException(el);
                     }
                 } catch (DatabaseConnectionException ex) {
@@ -42,9 +63,5 @@ public class UILogin extends JFrame {
                 }
             }
         });
-    }
-
-    public boolean isLogged() {
-        return isLogged;
     }
 }
