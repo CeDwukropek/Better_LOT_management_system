@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 05 Paź 2023, 13:29
+-- Czas generowania: 24 Paź 2023, 14:37
 -- Wersja serwera: 10.4.27-MariaDB
 -- Wersja PHP: 8.2.0
 
@@ -102,16 +102,19 @@ CREATE TABLE `customer` (
   `name` varchar(255) NOT NULL,
   `surname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `phoneNumber` varchar(15) NOT NULL,
-  `birthDate` date NOT NULL
+  `birthDate` date NOT NULL,
+  `isAdmin` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Zrzut danych tabeli `customer`
 --
 
-INSERT INTO `customer` (`id`, `name`, `surname`, `email`, `phoneNumber`, `birthDate`) VALUES
-(1, 'Adam', 'Kowalski', 'adamkowalski@gmail.com', '642973564', '2003-10-15');
+INSERT INTO `customer` (`id`, `name`, `surname`, `email`, `password`, `phoneNumber`, `birthDate`, `isAdmin`) VALUES
+(1, 'Adam', 'Kowalski', 'adamkowalski@gmail.com', '234', '+48 642 973 564', '2003-10-15', 0),
+(2, 'Kamil', 'Chmielowski', 'kamilekuwu@gmail.com', 'test123', '+48 328 723 987', '2005-09-14', 1);
 
 -- --------------------------------------------------------
 
@@ -249,7 +252,7 @@ ALTER TABLE `countries`
 -- AUTO_INCREMENT dla tabeli `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT dla tabeli `flight`
