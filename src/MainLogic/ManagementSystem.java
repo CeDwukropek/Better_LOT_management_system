@@ -11,7 +11,7 @@ public class ManagementSystem {
     ArrayList<User> flightAttenders = new ArrayList<>();
 
     public void loginUI() {
-        UILogin frame = new UILogin();
+        UILogin frame = new UILogin(this);
 
         frame.setContentPane(frame.mainPanel);
         frame.setTitle("Login");

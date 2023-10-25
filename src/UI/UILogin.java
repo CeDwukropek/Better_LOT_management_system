@@ -21,7 +21,8 @@ public class UILogin extends JFrame {
     private JButton logInButton;
     private static ManagementSystem manager;
 
-    public UILogin() {
+    public UILogin(ManagementSystem manager) {
+        this.manager = manager;
         textField1.setBorder(BorderFactory.createMatteBorder(0,0,1,0, Color.GRAY));
         passwordField1.setBorder(BorderFactory.createMatteBorder(0,0,1,0, Color.GRAY));
         logInButton.addActionListener(new ActionListener() {
@@ -41,19 +42,18 @@ public class UILogin extends JFrame {
                         boolean isAdmin = res.getBoolean("isAdmin");
                         String name = res.getString("name");
 
-                        System.out.println(isAdmin);
-                        System.out.println(name);
-
                         boolean isLogged = true;
 
                         if(!isLogged) { return; }
 
                         if(isAdmin) {
                             manager.adminUI();
-                            System.out.println("Admin");
+                            System.out.println("Zalogowano na admina");
+                            dispose();
                         } else {
                             manager.customerUI(name);
-                            System.out.println("Customer");
+                            System.out.println("Zalogowano na Customera");
+                            dispose();
                         }
                     } catch (QueryException | SQLException el) {
                         throw new RuntimeException(el);
