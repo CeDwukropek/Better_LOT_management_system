@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 05 Paź 2023, 13:29
+-- Czas generowania: 27 Paź 2023, 11:25
 -- Wersja serwera: 10.4.27-MariaDB
 -- Wersja PHP: 8.2.0
 
@@ -102,16 +102,19 @@ CREATE TABLE `customer` (
   `name` varchar(255) NOT NULL,
   `surname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `phoneNumber` varchar(15) NOT NULL,
-  `birthDate` date NOT NULL
+  `birthDate` date NOT NULL,
+  `isAdmin` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Zrzut danych tabeli `customer`
 --
 
-INSERT INTO `customer` (`id`, `name`, `surname`, `email`, `phoneNumber`, `birthDate`) VALUES
-(1, 'Adam', 'Kowalski', 'adamkowalski@gmail.com', '642973564', '2003-10-15');
+INSERT INTO `customer` (`id`, `name`, `surname`, `email`, `password`, `phoneNumber`, `birthDate`, `isAdmin`) VALUES
+(1, 'Adam', 'Kowalski', 'adamkowalski@gmail.com', '234', '+48 642 973 564', '2003-10-15', 0),
+(2, 'Kamil', 'Chmielowski', 'kamilekuwu@gmail.com', 'test123', '+48 328 723 987', '2005-09-14', 1);
 
 -- --------------------------------------------------------
 
@@ -141,15 +144,41 @@ CREATE TABLE `flight` (
   `id` int(11) NOT NULL,
   `plane_id` int(11) NOT NULL,
   `startAirport_id` int(11) NOT NULL,
-  `finalAirport_id` int(11) NOT NULL
+  `finalAirport_id` int(11) NOT NULL,
+  `gate_id` varchar(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Zrzut danych tabeli `flight`
 --
 
-INSERT INTO `flight` (`id`, `plane_id`, `startAirport_id`, `finalAirport_id`) VALUES
-(1, 1, 1, 4);
+INSERT INTO `flight` (`id`, `plane_id`, `startAirport_id`, `finalAirport_id`, `gate_id`) VALUES
+(1, 1, 1, 4, '1A');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `gate`
+--
+
+CREATE TABLE `gate` (
+  `id` varchar(2) NOT NULL DEFAULT '1A'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Zrzut danych tabeli `gate`
+--
+
+INSERT INTO `gate` (`id`) VALUES
+('1A'),
+('1B'),
+('1C'),
+('2A'),
+('2B'),
+('2C'),
+('3A'),
+('3B'),
+('3C');
 
 -- --------------------------------------------------------
 
@@ -211,11 +240,18 @@ ALTER TABLE `customer-flight`
 -- Indeksy dla tabeli `flight`
 --
 ALTER TABLE `flight`
-  ADD PRIMARY KEY (`id`,`plane_id`,`startAirport_id`,`finalAirport_id`),
+  ADD PRIMARY KEY (`id`,`plane_id`,`startAirport_id`,`finalAirport_id`,`gate_id`),
   ADD KEY `plane_id` (`plane_id`),
   ADD KEY `startAirport_id` (`startAirport_id`),
   ADD KEY `plane_id_2` (`plane_id`),
-  ADD KEY `finalAirport_id` (`finalAirport_id`);
+  ADD KEY `finalAirport_id` (`finalAirport_id`),
+  ADD KEY `gate_id` (`gate_id`);
+
+--
+-- Indeksy dla tabeli `gate`
+--
+ALTER TABLE `gate`
+  ADD UNIQUE KEY `id` (`id`);
 
 --
 -- Indeksy dla tabeli `plane`
@@ -249,7 +285,7 @@ ALTER TABLE `countries`
 -- AUTO_INCREMENT dla tabeli `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT dla tabeli `flight`
@@ -292,7 +328,8 @@ ALTER TABLE `customer-flight`
 ALTER TABLE `flight`
   ADD CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`startAirport_id`) REFERENCES `airport` (`id`),
   ADD CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`finalAirport_id`) REFERENCES `airport` (`id`),
-  ADD CONSTRAINT `flight_ibfk_4` FOREIGN KEY (`plane_id`) REFERENCES `plane` (`id`);
+  ADD CONSTRAINT `flight_ibfk_4` FOREIGN KEY (`plane_id`) REFERENCES `plane` (`id`),
+  ADD CONSTRAINT `flight_ibfk_5` FOREIGN KEY (`gate_id`) REFERENCES `gate` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
