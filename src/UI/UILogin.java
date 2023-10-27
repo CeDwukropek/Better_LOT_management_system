@@ -19,7 +19,7 @@ public class UILogin extends JFrame {
     private JTextField textField1;
     private JPasswordField passwordField1;
     private JButton logInButton;
-    private static ManagementSystem manager;
+    private ManagementSystem manager;
 
     public UILogin(ManagementSystem manager) {
         this.manager = manager;
@@ -47,7 +47,7 @@ public class UILogin extends JFrame {
                         if(!isLogged) { return; }
 
                         if(isAdmin) {
-                            manager.adminUI();
+                            manager.adminUI(name);
                             System.out.println("Zalogowano na admina");
                             dispose();
                         } else {

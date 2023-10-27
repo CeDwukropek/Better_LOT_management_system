@@ -1,5 +1,6 @@
 package MainLogic;
 
+import UI.UIAdmin;
 import UI.UICustomer;
 import UI.UILogin;
 import Users.User;
@@ -32,7 +33,14 @@ public class ManagementSystem {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void adminUI() {
-        // TODO: make this fcking UI
+    public void adminUI(String name) {
+        UIAdmin frame = new UIAdmin(name);
+
+        frame.setContentPane(frame.mainPanel);
+        frame.setTitle("Customer");
+        frame.setSize(600, 450);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }
