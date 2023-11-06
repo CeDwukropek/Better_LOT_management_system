@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 31 Paź 2023, 14:14
+-- Czas generowania: 27 Paź 2023, 11:25
 -- Wersja serwera: 10.4.27-MariaDB
 -- Wersja PHP: 8.2.0
 
@@ -124,16 +124,15 @@ INSERT INTO `customer` (`id`, `name`, `surname`, `email`, `password`, `phoneNumb
 
 CREATE TABLE `customer-flight` (
   `customer_id` int(11) NOT NULL,
-  `flight_id` int(11) NOT NULL,
-  `gate_id` varchar(2) NOT NULL DEFAULT '1A'
+  `flight_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Zrzut danych tabeli `customer-flight`
 --
 
-INSERT INTO `customer-flight` (`customer_id`, `flight_id`, `gate_id`) VALUES
-(1, 1, '1A');
+INSERT INTO `customer-flight` (`customer_id`, `flight_id`) VALUES
+(1, 1);
 
 -- --------------------------------------------------------
 
@@ -145,15 +144,16 @@ CREATE TABLE `flight` (
   `id` int(11) NOT NULL,
   `plane_id` int(11) NOT NULL,
   `startAirport_id` int(11) NOT NULL,
-  `finalAirport_id` int(11) NOT NULL
+  `finalAirport_id` int(11) NOT NULL,
+  `gate_id` varchar(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Zrzut danych tabeli `flight`
 --
 
-INSERT INTO `flight` (`id`, `plane_id`, `startAirport_id`, `finalAirport_id`) VALUES
-(1, 1, 1, 4);
+INSERT INTO `flight` (`id`, `plane_id`, `startAirport_id`, `finalAirport_id`, `gate_id`) VALUES
+(1, 1, 1, 4, '1A');
 
 -- --------------------------------------------------------
 
@@ -233,18 +233,19 @@ ALTER TABLE `customer`
 -- Indeksy dla tabeli `customer-flight`
 --
 ALTER TABLE `customer-flight`
-  ADD PRIMARY KEY (`customer_id`,`flight_id`,`gate_id`),
-  ADD KEY `gate_id` (`gate_id`),
+  ADD PRIMARY KEY (`customer_id`,`flight_id`),
   ADD KEY `flight_id` (`flight_id`);
 
 --
 -- Indeksy dla tabeli `flight`
 --
 ALTER TABLE `flight`
-  ADD PRIMARY KEY (`id`,`plane_id`,`startAirport_id`,`finalAirport_id`),
+  ADD PRIMARY KEY (`id`,`plane_id`,`startAirport_id`,`finalAirport_id`,`gate_id`),
   ADD KEY `plane_id` (`plane_id`),
   ADD KEY `startAirport_id` (`startAirport_id`),
-  ADD KEY `finalAirport_id` (`finalAirport_id`);
+  ADD KEY `plane_id_2` (`plane_id`),
+  ADD KEY `finalAirport_id` (`finalAirport_id`),
+  ADD KEY `gate_id` (`gate_id`);
 
 --
 -- Indeksy dla tabeli `gate`
@@ -287,6 +288,12 @@ ALTER TABLE `customer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT dla tabeli `flight`
+--
+ALTER TABLE `flight`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT dla tabeli `plane`
 --
 ALTER TABLE `plane`
@@ -313,16 +320,16 @@ ALTER TABLE `city`
 --
 ALTER TABLE `customer-flight`
   ADD CONSTRAINT `customer-flight_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`),
-  ADD CONSTRAINT `customer-flight_ibfk_2` FOREIGN KEY (`gate_id`) REFERENCES `gate` (`id`),
-  ADD CONSTRAINT `customer-flight_ibfk_3` FOREIGN KEY (`flight_id`) REFERENCES `flight` (`id`);
+  ADD CONSTRAINT `customer-flight_ibfk_2` FOREIGN KEY (`flight_id`) REFERENCES `flight` (`id`);
 
 --
 -- Ograniczenia dla tabeli `flight`
 --
 ALTER TABLE `flight`
-  ADD CONSTRAINT `flight_ibfk_1` FOREIGN KEY (`startAirport_id`) REFERENCES `airport` (`id`),
-  ADD CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`finalAirport_id`) REFERENCES `airport` (`id`),
-  ADD CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`plane_id`) REFERENCES `plane` (`id`);
+  ADD CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`startAirport_id`) REFERENCES `airport` (`id`),
+  ADD CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`finalAirport_id`) REFERENCES `airport` (`id`),
+  ADD CONSTRAINT `flight_ibfk_4` FOREIGN KEY (`plane_id`) REFERENCES `plane` (`id`),
+  ADD CONSTRAINT `flight_ibfk_5` FOREIGN KEY (`gate_id`) REFERENCES `gate` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
