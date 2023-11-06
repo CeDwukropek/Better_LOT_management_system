@@ -2,6 +2,7 @@ package Creator.Airport;
 
 import Creator.*;
 import DB.DBConnection;
+import DB.DatabaseConnectionException;
 import DB.QueryException;
 
 import java.sql.ResultSet;
@@ -11,9 +12,9 @@ import java.util.Arrays;
 
 public class AirportCreator extends Creator implements ICreator {
     private final ArrayList<Airport> airports = new ArrayList<>();
+    private static AirportCreator instance;
 
-    public AirportCreator(DBConnection db) throws QueryException, SQLException {
-        super(db);
+    public AirportCreator() throws QueryException, SQLException, DatabaseConnectionException {
         importData();
     }
 
@@ -38,6 +39,13 @@ public class AirportCreator extends Creator implements ICreator {
     @Override
     public void printData() {
 
+    }
+
+    public static AirportCreator getInstance() throws QueryException, SQLException, DatabaseConnectionException {
+        if (instance == null) {
+            instance = new AirportCreator();
+        }
+        return instance;
     }
 
     public ArrayList<Airport> getData() {

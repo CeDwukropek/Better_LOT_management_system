@@ -8,17 +8,9 @@ import DB.*;
 
 
 public class Main {
-    public static void main(String[] args) throws DatabaseConnectionException, QueryException {
-        try {
-            DBConnection db = new DBConnection();
-            CustomersCreator customersCreator = new CustomersCreator(db);
-            AirportCreator airportCreator = new AirportCreator(db);
-            PlanesCreator planesCreator = new PlanesCreator(db, airportCreator.getData(), customersCreator.getData());
+    public static void main(String[] args){
+        ManagementSystem manager = new ManagementSystem();
 
-            planesCreator.printData();
-        }
-        catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        manager.loginUI();
     }
 }

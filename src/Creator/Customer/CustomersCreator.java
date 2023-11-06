@@ -2,6 +2,7 @@ package Creator.Customer;
 
 import Creator.*;
 import DB.DBConnection;
+import DB.DatabaseConnectionException;
 import DB.QueryException;
 
 import java.sql.ResultSet;
@@ -11,8 +12,8 @@ import java.util.Arrays;
 
 public class CustomersCreator extends Creator implements ICreator {
     private final ArrayList<Customer> customers = new ArrayList<>();
-    public CustomersCreator(DBConnection db) throws QueryException, SQLException {
-        super(db);
+    private static CustomersCreator instance;
+    public CustomersCreator() throws QueryException, SQLException, DatabaseConnectionException {
         importData();
     }
 
@@ -34,6 +35,13 @@ public class CustomersCreator extends Creator implements ICreator {
     @Override
     public void printData() {
 
+    }
+
+    public static CustomersCreator getInstance() throws QueryException, SQLException, DatabaseConnectionException {
+        if (instance == null) {
+            instance = new CustomersCreator();
+        }
+        return instance;
     }
 
     public ArrayList<Customer> getData() {
