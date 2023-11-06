@@ -15,8 +15,16 @@ public class UIAdmin extends JFrame{
     private JButton createFlightButton;
     private JButton editFlightButton;
     private ManagementSystem manager = new ManagementSystem();
+    protected String name;
+    private static UIAdmin instance;
 
     public UIAdmin(String name) {
+        if(name == null) {
+            name = this.getName();
+        } else {
+            this.name = name;
+        }
+
         welcomeLabel.setText("Welcome " + name);
         createFlightButton.addActionListener(new ActionListener() {
             @Override
@@ -41,4 +49,13 @@ public class UIAdmin extends JFrame{
             }
         });
     }
+
+    public static UIAdmin getInstance(String name) {
+        if (instance == null) {
+            instance = new UIAdmin(name);
+        }
+        return instance;
+    }
+
+    public String getName() { return this.name; }
 }

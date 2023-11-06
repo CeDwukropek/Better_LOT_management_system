@@ -38,7 +38,7 @@ public class ManagementSystem {
     }
 
     public void adminUI(String name) {
-        UIAdmin frame = new UIAdmin(name);
+        UIAdmin frame = UIAdmin.getInstance(name);
 
         frame.setContentPane(frame.mainPanel);
         frame.setTitle("Admin");
@@ -49,7 +49,7 @@ public class ManagementSystem {
     }
 
     public void createFlightUI() throws QueryException, DatabaseConnectionException, SQLException {
-        UIAdminCreateFlight frame = new UIAdminCreateFlight();
+        UIAdminCreateFlight frame = new UIAdminCreateFlight(this);
 
         frame.setContentPane(frame.mainPanel);
         frame.setTitle("Create Flight");

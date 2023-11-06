@@ -7,6 +7,6 @@ public class UICustomer extends JFrame {
     public JLabel label;
 
     public UICustomer(String name) {
-        label.setText("Well cum " + name);
+        label.setText("Welcome" + name);
     }
 }
